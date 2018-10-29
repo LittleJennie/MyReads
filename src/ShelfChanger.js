@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 class ShelfChanger extends Component {
     state = {
-        currentShelf: this.props.book.shelf ? this.props.book.shelf : 'none'
+        currentShelf: this.props.book.shelf
     }
 
     render() {

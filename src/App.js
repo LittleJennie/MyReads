@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import SearchPage from './SearchPage'
+import Search from './Search'
 import ListBooks from './ListBooks'
 import './App.css'
 
@@ -36,8 +36,8 @@ class App extends Component {
             changeShelfType={this.changeShelfType}
           />
         )}/>
-        <Route exact path="/SearchPage" render={() => (
-          <SearchPage 
+        <Route exact path="/search" render={(history) => (
+          <Search 
             books={this.state.allBooks}
             changeShelfType={this.changeShelfType}
           />

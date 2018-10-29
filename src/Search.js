@@ -3,15 +3,23 @@ import { Link } from 'react-router-dom'
 import Book from './Book.js'
 import * as BooksAPI from './BooksAPI'
 
-class SearchPage extends Component {
+class Search extends Component {
     state = {
         showingBooks: []
     }
-    searchBooks = (query) => {
+    searchBooks = (query, booksInShelf) => {
         if (query) {
             BooksAPI.search(query).then((res) => {
                 console.log(res)
                 if (Array.isArray(res)) {
+                    res.map((book) => {
+                        book.shelf = "none"
+                        booksInShelf.forEach((bookInShelf) => {
+                            if(book.id === bookInShelf.id) {
+                                book.shelf = bookInShelf.shelf
+                            }
+                        })
+                    })
                     this.setState({showingBooks: res})
                 } else {
                     this.setState({showingBooks: []})
@@ -24,7 +32,7 @@ class SearchPage extends Component {
 
 
     render() {
-        const {changeShelfType} = this.props;
+        const {changeShelfType, books} = this.props;
         const {showingBooks} = this.state;
 
         return (
@@ -32,7 +40,7 @@ class SearchPage extends Component {
                 <div className="search-books-bar">
                     <Link to="/" className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title" onChange={(e) => this.searchBooks(e.target.value)}/>
+                        <input type="text" placeholder="Search by title" onChange={(e) => this.searchBooks(e.target.value, books)}/>
                     </div>
                 </div>
                 <div className="search-books-results">
@@ -53,4 +61,4 @@ class SearchPage extends Component {
     }
 }
 
-export default SearchPage;
+export default Search;
