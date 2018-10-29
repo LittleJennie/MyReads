@@ -14,7 +14,6 @@ class ShelfChanger extends Component {
             changeShelfType(book, e.target.value)
             this.setState({currentShelf: e.target.value})  
         }
-        console.log(currentShelf)
 
         return (
           <div className="book-shelf-changer">

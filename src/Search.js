@@ -10,9 +10,8 @@ class Search extends Component {
     searchBooks = (query, booksInShelf) => {
         if (query) {
             BooksAPI.search(query).then((res) => {
-                console.log(res)
                 if (Array.isArray(res)) {
-                    res.map((book) => {
+                    res.forEach((book) => {
                         book.shelf = "none"
                         booksInShelf.forEach((bookInShelf) => {
                             if(book.id === bookInShelf.id) {
