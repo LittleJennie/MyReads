@@ -8,24 +8,23 @@ class SearchPage extends Component {
         showingBooks: []
     }
     searchBooks = (query) => {
-        BooksAPI.search(query).then((res) => {
-            console.log(res)
-            if (Array.isArray(res)) {
-                this.setState({showingBooks: res})
-            } else {
-                this.setState({showingBooks: []})
-            }
-        })
+        if (query) {
+            BooksAPI.search(query).then((res) => {
+                console.log(res)
+                if (Array.isArray(res)) {
+                    this.setState({showingBooks: res})
+                } else {
+                    this.setState({showingBooks: []})
+                }
+            })
+        } else {
+            this.setState({showingBooks: []})
+        }
     }
 
-    componentDidMount() {
-        BooksAPI.getAll().then((books) => {
-            this.setState({showingBooks: books})
-        })
-    }
 
     render() {
-        const {books, changeShelfType} = this.props;
+        const {changeShelfType} = this.props;
         const {showingBooks} = this.state;
 
         return (

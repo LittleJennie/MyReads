@@ -3,9 +3,8 @@ import React, { Component } from 'react'
 
 class ShelfChanger extends Component {
     state = {
-        currentShelf: this.props.book.shelf || "none"
+        currentShelf: this.props.book.shelf ? this.props.book.shelf : 'none'
     }
-
 
     render() {
         const {book, changeShelfType} = this.props;
@@ -15,6 +14,7 @@ class ShelfChanger extends Component {
             changeShelfType(book, e.target.value)
             this.setState({currentShelf: e.target.value})  
         }
+        console.log(currentShelf)
 
         return (
           <div className="book-shelf-changer">
